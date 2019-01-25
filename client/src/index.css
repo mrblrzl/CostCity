@@ -3,3 +3,10 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.landingPage {
+  background-image: url('./background.jpg');
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; */
+}
