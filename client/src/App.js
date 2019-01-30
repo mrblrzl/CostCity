@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import LandingPage from './components/LandingPage';
-import AdminPanel from "./pages/AdminPanel"
+import AdminPanel from "./pages/AdminPanel";
+import SignupPage from "./pages/SignupPage";
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
           <Route exact path={"/"} component={LandingPage} />
           <Route path={"/users/:userId"} component={Profile} />
           <Route path={"/admin/:userId"} component={AdminPanel} />
+          <Route path={"/signup"} component={SignupPage} />
           <Route component={NotFound}/>
         </Switch>
       </Router>
