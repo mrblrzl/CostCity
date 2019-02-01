@@ -94,7 +94,7 @@ class LandingPage extends Component {
 
                     <Button type="button" onClick={this.handleSubmit} color='teal' fluid size='large'>
                       Login
-            </Button>
+                    </Button>
                   </Segment>
                 </Form>
                 <Message>

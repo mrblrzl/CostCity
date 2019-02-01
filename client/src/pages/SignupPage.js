@@ -8,12 +8,17 @@ import logo from '../logo.svg';
 class SignupPage extends Component {
  constructor(props) {
    super(props);
-   this.state = { email: '', password: '',  firstName: '', lastName: '', };
+   this.state = { email: '', username: ' ', password: '',  firstName: '', lastName: '', };
  }
 
  recordEmail = event => {
    this.setState({ email: event.target.value });
    console.log('What is the user currently typing in the email input right now?', this.state.email);
+ }
+ 
+ recordUserName = event => {
+   this.setState({ username: event.target.value });
+   console.log('What is the user currently typing in the username input right now?', this.state.username);
  }
 
  recordPassword = event => {
@@ -67,9 +72,32 @@ class SignupPage extends Component {
                    type='password'
                    onChange={this.recordPassword}
                  />
-
+                <Form.Input fluid  placeholder='Username' name="username" onChange={this.recordUserName} />
                  <Form.Input fluid  placeholder='First name' name="firstName" onChange={this.recordFirstname} />
                  <Form.Input fluid  placeholder='Last name' name="lastName" onChange={this.recordLastname} />
+                 <div className="form-check">
+          <label>
+            <input
+              type="radio"
+              name="authorization"
+              value="admin"
+              className="form-check-input"
+            />
+            ShareShopper 
+          </label>
+        </div>
+
+        <div className="form-check">
+          <label>
+            <input
+              type="radio"
+              name="authorization"
+              value="user"
+              className="form-check-input"
+            />
+            Membership Holder
+          </label>
+        </div>
 
                  <Button type="submit" color='teal' fluid size='large'>
                    Sign-up
