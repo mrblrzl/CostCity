@@ -1,23 +1,29 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import 'semantic-ui-css/semantic.min.css';
-import Nav from "./components/Nav";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 import LandingPage from './components/LandingPage';
-import Routes from './routes.js';
-function App () {
+import AdminPanel from "./pages/AdminPanel";
+import SignupPage from "./pages/SignupPage";
+
+class App extends React.Component {
+  render() {
     return (
-      <div>
-      <Nav />
-      <Routes />
-
-      </div>
-      
-      
-        
-  
-    );
+      <Router>
+        <Switch>
+          <Route exact path={"/"} component={LandingPage} />
+          <Route path={"/users/:userId"} component={Profile} />
+          <Route path={"/admin/:userId"} component={AdminPanel} />
+          <Route path={"/signup"} component={SignupPage} />
+          <Route component={NotFound}/>
+        </Switch>
+      </Router>
+    )
+>>>>>>> 9d33c2586832ae909a90b7a1394225ea316dbdff
   }
-
+}
 
 export default App;
