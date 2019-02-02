@@ -5,7 +5,6 @@ import Layout from "../Layout"
 import logo from '../../logo.svg';
 import {Api} from "../../services";
 
-
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -105,19 +104,6 @@ class LandingPage extends Component {
             </Grid>
           </div>
 
-<<<<<<< HEAD
-                  <Button type="submit" color='teal' fluid size='large'>
-                    Login
-            </Button>
-                </Segment>
-              </Form>
-              <Message>
-                New to us? <Link to='/signup'>Sign Up</Link>
-              </Message>
-            </Grid.Column>
-          </Grid>
-=======
->>>>>>> 9d33c2586832ae909a90b7a1394225ea316dbdff
         </div>
 
       </Layout>

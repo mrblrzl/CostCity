@@ -22,7 +22,6 @@ class App extends React.Component {
         </Switch>
       </Router>
     )
->>>>>>> 9d33c2586832ae909a90b7a1394225ea316dbdff
   }
 }
 
