@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const TobuySchema = new Schema({
   action: {
     type: String,
+    approved: Boolean,
     required: [true, 'The tobuy text field is required']
   }
 })
