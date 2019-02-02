@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import background from "../background.jpg";
 import logo from '../logo.svg';
+import API from "../utils/API"
 
 
 class SignupPage extends Component {
@@ -10,6 +11,20 @@ class SignupPage extends Component {
    super(props);
    this.state = { email: '', username: ' ', password: '',  firstName: '', lastName: '', };
  }
+
+ handleFormSubmit = event => {
+  event.preventDefault();
+  if (this.state.firstName && this.state.password && this.state.email && this.state.lastName) {
+    API.saveUser({
+      lastname: this.state.lastName,
+      password: this.state.password,
+      email: this.state.email,
+      firstname: this.state.firstName
+    })
+      .then(res => API.registerUser()) // <=== problem with posting check utils/apis
+      .catch(err => console.log(err));
+  }
+};
 
  recordEmail = event => {
    this.setState({ email: event.target.value });
@@ -99,7 +114,7 @@ class SignupPage extends Component {
           </label>
         </div>
 
-                 <Button type="submit" color='teal' fluid size='large'>
+                 <Button onClick={this.handleFormSubmit} color='teal' fluid size='large'>
                    Sign-up
            </Button>
                </Segment>
