@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-import LandingPage from './components/LandingPage';
+import LandingPage from "./pages/LandingPage";
 import AdminPanel from "./pages/AdminPanel";
 import SignupPage from "./pages/SignupPage";
 

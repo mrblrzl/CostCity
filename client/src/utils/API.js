@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
  // Gets all books
- getItems: function() {
-   return axios.get("/api/tobuy");
+ getUsers: function() {
+   return axios.get("/api/users");
  },
  // Gets the book with the given id
  getUser: function(id) {
@@ -20,4 +20,26 @@ export default {
  saveUser: function(userData) {
    return axios.post("/api/users/",  userData);
  }
+
+/**takes in a use object with an email and password property returns the user and token*/
+
+//  logInUser: (user) => {
+//   const endpoint = "/api/users";
+//   const body = { ...user }
+//   const requestOptions = {}
+//   return axios.post(endpoint, body, requestOptions)
+//       .then(response => {
+//           return response.data.user
+//       })
+// },
+// getUserInfo: (userId) => {
+//   const endpoint = `/api/users/${userId}`;
+//   const requestOptions = {}
+//   return axios.get(endpoint, requestOptions)
+//       .then(response => {
+//           return response.data
+//       })
+// }
+
+
 };

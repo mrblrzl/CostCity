@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import Layout from "../components/Layout";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import background from '../../background.jpg';
-import Layout from "../Layout"
-import logo from '../../logo.svg';
-import {Api} from "../../services";
+import background from '../background.jpg';
+import logo from '../logo.svg';
+import API from "../utils/API";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -34,20 +34,22 @@ class LandingPage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.formIsValid()) {
-      return Api.logInUser({
+      return API.getUser({
         email: this.state.email,
         password: this.state.password
       })
-        .then(userAndToken=>{
-          console.log(userAndToken,"userandToken")
-          const userId=userAndToken._id;
-          if(userAndToken.role ==="admin"){
-            this.props.history.push(`/admin/${userId}`)
-          } else {
-            this.props.history.push(`/users/${userId}`)
-          }
-        })
-        .catch(err=>console.log(err.response.data))
+      .then(res => API.getUser())
+      .catch(err => console.log(err));
+        // .then(userAndToken=>{
+        //   console.log(userAndToken,"userandToken")
+        //   const userId=userAndToken._id;
+        //   if(userAndToken.role ==="admin"){
+        //     this.props.history.push(`/admin/${userId}`)
+        //   } else {
+        //     this.props.history.push(`/users/${userId}`)
+        //   }
+        // })
+        // .catch(err=>console.log(err.response.data))
     } else {
       return this.showErrors()
     }
