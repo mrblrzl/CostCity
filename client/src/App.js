@@ -7,7 +7,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
 import LandingPage from "./pages/LandingPage";
 import AdminPanel from "./pages/AdminPanel";
-import SignupPage from "./pages/SignupPage";
+import Register from "./pages/Register";
 
 class App extends React.Component {
   render() {
@@ -17,7 +17,7 @@ class App extends React.Component {
           <Route exact path={"/"} component={LandingPage} />
           <Route path={"/users/:userId"} component={Profile} />
           <Route path={"/admin/:userId"} component={AdminPanel} />
-          <Route path={"/signup"} component={SignupPage} />
+          <Route path={"/register"} component={Register} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

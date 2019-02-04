@@ -1,23 +1,38 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./routes/api");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const users = require("./routes/api/users");
 const app = express();
+
 const PORT = process.env.PORT || 3001;
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mongoProjectTest');
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(routes);
+
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/users", users);
+
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
 
-
-// const path = require("path");
-//app.use("/api", apiRouter)
 
 
 

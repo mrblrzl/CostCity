@@ -1,15 +1,99 @@
-const usersControllers = require("../../controllers/usersControllers");
-const router = require("express").Router();
-// Matches with "/api/books"
-router.route("/")
- .get(usersControllers.findOne)
- .post(usersControllers.create);
+const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../../config/keys");
 
-// Matches with "/api/books/:id"
-router
- .route("/:id")
- .get(usersControllers.findById)
-//  .post(usersControllers.create)
- .delete(usersControllers.remove);
+// Validation
+const validateRegisterInput = require("../../models/validation/register");
+const validateLoginInput = require("../../models/validation/login");
 
-module.exports = router;
+// User model
+const User = require("../../models/User");
+
+//Register new users 
+// ************************************************************
+router.post("/register", (req, res) => {
+    
+ // Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    User.findOne({ email: req.body.email }).then(user => {
+        if (user) {
+          return res.status(400).json({ email: "Email already exists" });
+        }
+    });
+
+    const newUser = new User({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      });
+
+// Hash password before saving in db
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
+        });
+      });
+  });
+
+//Login existing users 
+// ************************************************************
+  router.post("/login", (req, res) => {
+    // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+  const username = req.body.username;
+    const password = req.body.password;
+  // Find user by username
+    User.findOne({ username }).then(user => {
+      // Check if user exists
+      if (!user) {
+        return res.status(404).json({ usernamenotfound: "Username does not exist" });
+      }
+  // Check password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User matched
+          // Create JWT Payload
+          const payload = {
+            id: user.id,
+            username: user.username
+          };
+  // Sign-in token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 31556926 // 1 year in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        } else {
+          return res
+            .status(400)
+            .json({ passwordincorrect: "Password incorrect" });
+        }
+      });
+    });
+  });
+
+  module.exports = router;

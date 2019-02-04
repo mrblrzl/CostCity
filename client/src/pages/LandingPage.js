@@ -1,61 +1,35 @@
 import React, { Component } from "react";
 import Layout from "../components/Layout";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import background from '../background.jpg';
-import logo from '../logo.svg';
 import API from "../utils/API";
+import axios from "axios";
 
 class LandingPage extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      user: { email: '', password: '' }
+      username: "",
+      password: "",
+      errors: {}
     };
   }
 
-  recordEmail = event => {
-    this.setState({ email: event.target.value });
-    // this.setState(pvSt => {
-    //   return ({ user: { ...pvSt.user, email: event.target.value } })
-    // })
-    // console.log('What is the user currently typing in the email input right now?', this.state.email);
-  }
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+onSubmit = e => {
+    e.preventDefault();
+const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+console.log(userData);
+  };
 
-  recordPassword = event => {
-    this.setState({ password: event.target.value });
-    // console.log('What is the user currently typing in the password input right now?', this.state.password);
-  }
-  showErrors = () => {
-
-  }
-  formIsValid = () => {
-    return true
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    if (this.formIsValid()) {
-      return API.getUser({
-        email: this.state.email,
-        password: this.state.password
-      })
-      .then(res => API.getUser())
-      .catch(err => console.log(err));
-        // .then(userAndToken=>{
-        //   console.log(userAndToken,"userandToken")
-        //   const userId=userAndToken._id;
-        //   if(userAndToken.role ==="admin"){
-        //     this.props.history.push(`/admin/${userId}`)
-        //   } else {
-        //     this.props.history.push(`/users/${userId}`)
-        //   }
-        // })
-        // .catch(err=>console.log(err.response.data))
-    } else {
-      return this.showErrors()
-    }
-  }
+    
 
   render() {
+    const { errors } = this.state;
     return (
       <Layout>
         <div
@@ -79,14 +53,14 @@ class LandingPage extends Component {
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' color='teal' textAlign='center'>
-                  <Image src={logo} /> Log-in to your account
+                  <Image /> Log-in to your account
         </Header>
                 <Form size='large'>
                   <Segment stacked>
-                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' name="email" onChange={this.recordEmail} />
+                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' name="email" onChange={this.recordUsername} />
                     <Form.Input
                       fluid
-                      name="password"
+                      username="password"
                       icon='lock'
                       iconPosition='left'
                       placeholder='Password'
@@ -94,13 +68,13 @@ class LandingPage extends Component {
                       onChange={this.recordPassword}
                     />
 
-                    <Button type="button" onClick={this.handleSubmit} color='teal' fluid size='large'>
+                    <Button type="button" onClick={this.onSubmit} color='teal' fluid size='large'>
                       Login
                     </Button>
                   </Segment>
                 </Form>
                 <Message>
-                  New to us? <a href="/signup">Sign Up</a>
+                  New to us? <a href="/register">Sign Up</a>
                 </Message>
               </Grid.Column>
             </Grid>
@@ -114,17 +88,5 @@ class LandingPage extends Component {
 }
 
 
-// Presentation Component
-
-// function LandingPage({ children }) {
-//     return (
-//       <div
-//         style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-//         className="jumbotron"
-//       >
-//         {children}
-//       </div>
-//     );
-//   }
 
 export default LandingPage;
