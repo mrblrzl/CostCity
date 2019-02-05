@@ -1,9 +1,6 @@
 import React from "react";
-import { Api } from "../services";
+import API from "../utils/API";
 import Layout from "../components/Layout";
-import Jumbotron from "../components/Jumbotron";
-import { Container } from "semantic-ui-react";
-
 import { Grid, Image, Button, List } from 'semantic-ui-react'
 
 class AdminPanel extends React.Component {
