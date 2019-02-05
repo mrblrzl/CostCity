@@ -56,13 +56,13 @@ router.post("/register", (req, res) => {
     if (!isValid) {
       return res.status(400).json(errors);
     }
-  const username = req.body.username;
-    const password = req.body.password;
-  // Find user by username
-    User.findOne({ username }).then(user => {
+  const email = req.body.email;
+  const password = req.body.password;
+  // Find user by email
+    User.findOne({ email }).then(user => {
       // Check if user exists
       if (!user) {
-        return res.status(404).json({ usernamenotfound: "Username does not exist" });
+        return res.status(404).json({ emailnotfound: "Email does not exist" });
       }
   // Check password
       bcrypt.compare(password, user.password).then(isMatch => {
