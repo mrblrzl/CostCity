@@ -11,6 +11,17 @@ const validateLoginInput = require("../../models/validation/login");
 // User model
 const User = require("../../models/User");
 
+
+//Get all users
+
+router.get('/', (req, res) => {
+  console.log('req.user', req.user);
+  User.find({})
+    .then(users => {
+      console.log('users', users);
+      res.json(users);
+    })
+});
 //Register new users 
 // ************************************************************
 router.post("/register", (req, res) => {
@@ -50,6 +61,8 @@ router.post("/register", (req, res) => {
 //Login existing users 
 // ************************************************************
   router.post("/login", (req, res) => {
+    console.log('user', req.user)
+    console.log('req.body', req.body)
     // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
@@ -95,5 +108,7 @@ router.post("/register", (req, res) => {
       });
     });
   });
+
+
 
   module.exports = router;

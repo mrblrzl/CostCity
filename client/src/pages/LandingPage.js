@@ -3,12 +3,13 @@ import Layout from "../components/Layout";
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import API from "../utils/API";
 import axios from "axios";
+import { history } from '../index';
 
 class LandingPage extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
+      email: "",
       password: "",
       errors: {}
     };
@@ -19,11 +20,16 @@ class LandingPage extends Component {
   };
 onSubmit = e => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
-console.log(userData);
+    axios.post('/api/users/login', userData)
+      .then(token => {
+        localStorage.setItem('token', token.data);
+        history.push('/profile');
+      })
+      .catch(err => console.log('error logging in', err));
   };
 
     
@@ -57,15 +63,16 @@ console.log(userData);
         </Header>
                 <Form size='large'>
                   <Segment stacked>
-                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' name="email" onChange={this.recordUsername} />
+                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' id="email" name="email" onChange={this.onChange} />
                     <Form.Input
                       fluid
+                      id="password"
                       username="password"
                       icon='lock'
                       iconPosition='left'
                       placeholder='Password'
                       type='password'
-                      onChange={this.recordPassword}
+                      onChange={this.onChange}
                     />
 
                     <Button type="button" onClick={this.onSubmit} color='teal' fluid size='large'>

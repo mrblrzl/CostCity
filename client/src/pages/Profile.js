@@ -43,13 +43,14 @@ class UserProfile extends Component {
   };
 
   componentDidMount() {
+    // Load all users 
     this.loadUsers();
   }
 
   loadUsers = () => {
     API.getUsers()
       .then(res =>
-        this.setState({ users: res.data, email: "", username: "" })
+        this.setState({ users: res.data })
       )
       .catch(err => console.log(err));
   };
@@ -85,6 +86,11 @@ class UserProfile extends Component {
               </Card.Content> */}
             </Card>
           ))}
+          {/* {this.state.user.isAdmin ?
+            <button type="button"> Promote to Admin </button>
+            : 
+            null
+          } */}
         </div>
 
       </Layout>
