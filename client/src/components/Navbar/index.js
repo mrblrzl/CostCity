@@ -1,6 +1,6 @@
 import React from "react";
 
-function Nav() {
+function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
      <a className="navbar-brand" href="/">
@@ -15,4 +15,4 @@ function Nav() {
     );
 }
 
-export default Nav;
+export default Navbar;
