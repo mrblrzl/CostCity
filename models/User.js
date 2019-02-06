@@ -27,6 +27,9 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
     required: true
+  },
+  itemlist:{
+    items: []
   }
 
 //   groups: [],

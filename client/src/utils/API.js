@@ -2,6 +2,9 @@ import axios from "axios";
 
 export default {
  // Gets all books
+ getList: function() {
+   return axios.get("../models")
+ },
  getUsers: function() {
    return axios.get("/api/users");
  },

@@ -41,6 +41,7 @@ onSubmit = e => {
         <div
           style={{ height: "100vh", clear: "both", paddingTop: 120, textAlign: "center" }}
           className="landingPage"
+          // to add animated backgorund add className="anmiate-area"
         >
 
           <div className='login-form'>

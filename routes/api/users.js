@@ -11,6 +11,7 @@ const validateLoginInput = require("../../models/validation/login");
 // User model
 const User = require("../../models/User");
 
+//all the routes here have to currently be lead by /api/users "/whatever route here"
 
 //Get all users
 
@@ -22,6 +23,16 @@ router.get('/', (req, res) => {
       res.json(users);
     })
 });
+
+//router.get('/items')
+router.get('/users', (req, res) => {
+  req.params.userid
+  User.itemlist.find({})
+    .then(items => {
+      console.log("items", items);
+      res.json(items)
+    })
+})
 //Register new users 
 // ************************************************************
 router.post("/register", (req, res) => {

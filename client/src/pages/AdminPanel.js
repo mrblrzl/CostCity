@@ -1,12 +1,29 @@
 import React from "react";
 import API from "../utils/API";
 import Layout from "../components/Layout";
-import { Grid, Image, Button, List } from 'semantic-ui-react'
+import { Grid, Image, Button, List } from 'semantic-ui-react';
+import axios from "axios";
+import User from "../utils/API";
+
 
 class AdminPanel extends React.Component {
   state={
+    
   }
 
+  // load items is being called by the add button currently
+  LoadItems() {
+    axios.get("/api/users/users")
+      .then(function (req,res) {
+        console.log(res.body)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+
+      //this.setState({User: itemlist})
+    
+    };
   componentDidMount =()=>{
     // return Api.getUserInfo(this.props.match.params.userId)
   }
@@ -37,36 +54,16 @@ class AdminPanel extends React.Component {
       <List divided verticalAlign='middle'>
     <List.Item>
       <List.Content floated='right'>
-        <Button>Approve</Button>
+        <Button onClick={this.LoadItems}>Approve</Button>
         <Button>Delete</Button>
       </List.Content>
       <Image avatar src='/images/avatar/small/lena.png' />
       <List.Content>Milk</List.Content>
     </List.Item>
-    <List.Item>
-      <List.Content floated='right'>
-        <Button>Approve</Button>
-        <Button>Delete</Button>
-      </List.Content>
-      <Image avatar src='/images/avatar/small/lindsay.png' />
-      <List.Content>Half and Half</List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Content floated='right'>
-        <Button>Approve</Button>
-        <Button>Delete</Button>
-      </List.Content>
-      <Image avatar src='/images/avatar/small/mark.png' />
-      <List.Content>Bread</List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Content floated='right'>
-        <Button>Approve</Button>
-        <Button>Delete</Button>
-      </List.Content>
-      <Image avatar src='/images/avatar/small/molly.png' />
-      <List.Content>Eggs</List.Content>
-    </List.Item>
+    <label>
+      <input></input>
+    </label>
+    <button>submit</button>
   </List>
       </Grid.Column>
 
