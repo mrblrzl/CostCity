@@ -1,33 +1,68 @@
-require("./models/connections");
 const express = require("express");
-// require("dotenv").config();
-const path = require("path");
-const PORT = process.env.PORT || 3001;
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const users = require("./routes/api/users");
+const items = require("./routes/api/items");
+var logger = require("morgan");
 const app = express();
-const {userController} = require("./controllers");
-const apiRouter = express.Router()
-apiRouter.post("/users", userController.login)
-apiRouter.get("/users/:userId",userController.getUser)
 
-// Serve up static assets (usually on heroku)
+const PORT = process.env.PORT || 3001;
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use("/api", apiRouter)
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mongoProjectTest');
 
-// Send every request to the React app
-// Define any API routes before this runs
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-app.use((err,req,res,next)=>{
-  return res.status(400).json(err)
-})
+app.use(logger("dev"));
+
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
+);
+app.use(bodyParser.json());
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/users", users);
+app.use("/api/items", items);
+
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
 
-// did this got to master?
+
+
+
+
+
+
+
+
+
+
+
+
+// // Send every request to the React app
+// // Define any API routes before this runs
+// app.get("*", function (req, res) {
+  //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  // });
+  // app.use((err,req,res,next)=>{
+    //   return res.status(400).json(err)
+    // })
+    
+    // // did this got to master?
+    // const {userController} = require("./controllers");
+    // const apiRouter = express.Router()
+    // apiRouter.post("/users", userController.login)
+    // apiRouter.get("/users/:userId",userController.getUser)
+    
+    // // Serve up static assets (usually on heroku)

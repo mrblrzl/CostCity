@@ -7,7 +7,7 @@ import App from "./App";
 import { Router } from 'react-router-dom';
 import registerServiceWorker from "./registerServiceWorker";
 
-const history = process.env.NODE_ENV === 'test' ? createMemoryHistory() : createHistory();
+export const history = process.env.NODE_ENV === 'test' ? createMemoryHistory() : createHistory();
 
 ReactDOM.render(
   <Router history={history}>
