@@ -12,16 +12,17 @@ const Routes = props => (
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route exact path="/profile" component={Profile} />
-      <Route path="/admin/:userId" component={AdminPanel} />
+      <Route path="/admin" component={AdminPanel} />
       <Route path="/register" component={Register} />
       <Route component={NotFound}/>
-    
-    
-      
     </Switch>
   </div>
 )
 
+{/* <input type="submit">
+<a href="/notes">See your notes!</a>
+<a href="/user">See your profile!</a>
+<a href="/populateduser">See your profile, populated with notes!</a> */}
 
 export default withRouter(Routes);
 

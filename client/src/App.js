@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./index.css";
 import 'semantic-ui-css/semantic.min.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
