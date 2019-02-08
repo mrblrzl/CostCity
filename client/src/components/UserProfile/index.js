@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import { Card, Image } from 'semantic-ui-react'
-import background from '../../background.jpg';
-import logo from '../../logo.svg';
 
 class UserProfile extends Component {
   constructor(props) {
     super(props);
-    // Users is DUMMY DATA, replace it with the actual users from database
 
   }
 
   componentDidMount() {
-    // This is where you call your database and retrieve those users that are gonna be displayed on this page 
 
   }
   render() {

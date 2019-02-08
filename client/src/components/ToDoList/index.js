@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Grid, Image, Button, List } from 'semantic-ui-react'
+
 
 class shoppingList extends React.Component {
     constructor(props) {
@@ -50,10 +52,12 @@ class shoppingList extends React.Component {
   class Item extends React.Component {
     render() {
       return (
-        <li className="list-group-item justify-content-between" onClick={this.props.markDone}>
+        <List>
+        <li className="list-group-item" onClick={this.props.markDone}>
             <p style={{margin: 0}}>{this.props.desc}</p>
             <button className="btn btn-secondary input-group-addon" id="basic-addon1" onClick={() => this.props.func(this.props.id)}>X</button>
         </li>
+        </List>
       )
     }
   }
@@ -74,7 +78,7 @@ class shoppingList extends React.Component {
       return (
         <div className="input-group">
           <input type="text" className="form-control" placeholder="i.e. Kirkland Brand Toilet Paper " aria-describedby="basic-addon1" onChange={this.handleChange}/>
-          <button className="btn btn-secondary input-group-addon" id="basic-addon1" onClick={() => this.props.func(this.state.inputText)}>Add</button>
+          <Button color='teal' fluid size='small' id="basic-addon1" onClick={() => this.props.func(this.state.inputText)}>Add Item</Button>
         </div>
       )
     }

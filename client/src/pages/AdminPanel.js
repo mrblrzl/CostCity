@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import { Grid, Image, Button, List } from 'semantic-ui-react'
+import { Grid, List } from 'semantic-ui-react'
 import Calendar from "../components/Calendar";
 import ToDoList from "../components/ToDoList";
 
@@ -19,7 +19,7 @@ class AdminPanel extends React.Component {
         <Grid celled='internally'>
     <Grid.Row>
       <Grid.Column width={3}>
-      <h1>Welcome! </h1>
+      <h1></h1>
       </Grid.Column>
       <Grid.Column width={10}>
       <h1>Current Shopping List:</h1>

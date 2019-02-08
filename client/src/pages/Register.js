@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 import { history } from '../index'
 
@@ -45,19 +46,19 @@ render() {
     const { errors } = this.state;
 return (
   <Layout>
-      <div className="container">
-        <div className="row">
-          <div className="col s8 offset-s2">
-            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Register</b> below
-              </h4>
-              <p className="grey-text text-darken-1">
-                Already have an account? <Link to="/login">Log in</Link>
-              </p>
-            </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
+        <div
+          style={{ height: "100vh", clear: "both", paddingTop: 120 }}
+          className="landingPage animate-area"
+        >
+           <div className="login-form">
+           <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+              <Grid.Column style={{ maxWidth: 450 }}>
+              <Header as='h1' color='teal' textAlign='center'>
+                  <Image /> Register
+                </Header>
+       
+            <Form noValidate onSubmit={this.onSubmit} size = "large">
+            <Segment stacked>
                 <input
                   onChange={this.onChange}
                   value={this.state.username}
@@ -66,8 +67,8 @@ return (
                   type="text"
                 />
                 <label htmlFor="name">Name</label>
-              </div>
-              <div className="input-field col s12">
+  
+
                 <input
                   onChange={this.onChange}
                   value={this.state.email}
@@ -76,8 +77,7 @@ return (
                   type="email"
                 />
                 <label htmlFor="email">Email</label>
-              </div>
-              <div className="input-field col s12">
+              
                 <input
                   onChange={this.onChange}
                   value={this.state.password}
@@ -86,8 +86,6 @@ return (
                   type="password"
                 />
                 <label htmlFor="password">Password</label>
-              </div>
-              <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
                   value={this.state.password2}
@@ -96,24 +94,20 @@ return (
                   type="password"
                 />
                 <label htmlFor="password2">Confirm Password</label>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                >
+              
+                <Button type="submit" color='teal' fluid size='large'>
                   Sign up
-                </button>
-              </div>
-            </form>
+                </Button>
+                </Segment>
+                </Form>
+
+            <Message>
+                Already have an account? <Link to="/">Log in</Link>
+          </Message>
+          </Grid.Column>
+            </Grid>
           </div>
-        </div>
-      </div>
+          </div>
       </Layout>
     );
   }
