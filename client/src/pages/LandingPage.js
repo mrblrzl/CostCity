@@ -39,8 +39,8 @@ onSubmit = e => {
     return (
       <Layout>
         <div
-          style={{ height: "100vh", clear: "both", paddingTop: 120, textAlign: "center" }}
-          className="landingPage"
+          style={{ color: "#00b5ad", height: "100vh", clear: "both", paddingTop: 120 }}
+          className="landingPage animate-area"
         >
 
           <div className='login-form'>

@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const users = require("./routes/api/users");
+const items = require("./routes/api/items");
+var logger = require("morgan");
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -12,6 +14,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mongoProjectTest');
+
+app.use(logger("dev"));
 
 app.use(
   bodyParser.urlencoded({
@@ -28,6 +32,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
+app.use("/api/items", items);
 
 app.listen(PORT, function () {
   console.log(`🌎 ==> API server now on port ${PORT}!`);

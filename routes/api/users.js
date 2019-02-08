@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
       res.json(users);
     })
 });
+
 //Register new users 
 // ************************************************************
 router.post("/register", (req, res) => {
