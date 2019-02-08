@@ -10,6 +10,7 @@ class UserProfile extends Component {
   componentDidMount() {
 
   }
+  
   render() {
     return (
       <div
@@ -28,11 +29,11 @@ class UserProfile extends Component {
               <Card.Description>{user.email}</Card.Description>
             </Card.Content>
             <Card.Content extra>
-             {user.password}
+              {user.password}
             </Card.Content>
           </Card>
         ))}
-          
+
 
       </div>
     )

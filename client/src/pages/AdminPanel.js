@@ -9,12 +9,13 @@ class AdminPanel extends React.Component {
   }
 
   componentDidMount =()=>{
-    // return Api.getUserInfo(this.props.match.params.userId)
+
   }
 
   render() {
     return (
       <Layout>
+
     {/* Table headers     */}
         <Grid celled='internally'>
     <Grid.Row>
@@ -32,7 +33,7 @@ class AdminPanel extends React.Component {
       {/* ***********************************/}
       
       <Grid.Column width={3}>
-        {/* Calculator */}
+        {/* Future Development: Calculator */}
       </Grid.Column>
 
       <Grid.Column width={10}>
